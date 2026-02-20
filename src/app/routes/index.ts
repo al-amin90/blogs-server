@@ -2,6 +2,6 @@ import { Router } from 'express'
 
 const router = Router()
 
-router.use('/blogs')
+// router.use('/blogs')
 
 export default router

@@ -2,8 +2,6 @@ import status from 'http-status'
 import { TUser } from './user.interface'
 import UserModel from './user.model'
 import AppError from '../../errors/AppError'
-import bcrypt from 'bcrypt'
-import jwt from 'jsonwebtoken'
 import config from '../../config'
 import { createToken } from './user.utils'
 

@@ -27,7 +27,19 @@ const loginUser = catchAsync(async (req, res) => {
   })
 })
 
+const adminUserBlock = catchAsync(async (req, res) => {
+  const id = req.params.userId
+  await userService.adminUserBlockIntoDB(id as string)
+
+  sendResponse(res, {
+    statusCode: status.OK,
+    success: true,
+    message: 'User Blocked Successfully',
+  })
+})
+
 export const userController = {
   registerUser,
   loginUser,
+  adminUserBlock,
 }

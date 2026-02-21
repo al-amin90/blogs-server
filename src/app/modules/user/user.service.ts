@@ -40,7 +40,24 @@ const loginUserIntoDB = async (payload: Pick<TUser, 'email' | 'password'>) => {
   return token
 }
 
+const adminUserBlockIntoDB = async (id: string) => {
+  const result = await UserModel.findByIdAndUpdate(
+    id,
+    { isBlocked: true },
+    {
+      new: true,
+    },
+  )
+  console.log('result', result)
+  if (!result) {
+    throw new AppError(status.BAD_REQUEST, 'You cant update is blog ')
+  }
+
+  return result
+}
+
 export const userService = {
   createUserIntoDB,
   loginUserIntoDB,
+  adminUserBlockIntoDB,
 }

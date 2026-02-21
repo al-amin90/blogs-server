@@ -1,4 +1,4 @@
-import { ObjectId, Query } from 'mongoose'
+import { Query } from 'mongoose'
 import { TBlog } from '../modules/blog/blog.interface'
 
 class QueryBuilder<T> {

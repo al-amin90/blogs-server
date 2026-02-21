@@ -1,16 +1,22 @@
 import status from 'http-status'
 import AppError from '../../errors/AppError'
-import UserModel from '../user/user.model'
 import { TBlog } from './blog.interface'
 import BlogModel from './blog.model'
+import QueryBuilder from '../../builder/QueryBuillder'
 
 const createBlogIntoDB = async (payload: TBlog) => {
   const result = await BlogModel.create(payload)
   return result
 }
 
-const getAllBlogFromDB = async query => {
-  const result = await BlogModel.find()
+const getAllBlogFromDB = async (query: Record<string, unknown>) => {
+  const BlogQuery = new QueryBuilder(BlogModel.find(), query)
+    .search(['title', 'content'])
+    .filter()
+    .sort()
+    .fields()
+
+  const result = await BlogQuery.modelQuery
   return result
 }
 

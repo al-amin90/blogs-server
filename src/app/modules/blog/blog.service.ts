@@ -1,3 +1,4 @@
+import UserModel from '../user/user.model'
 import { TBlog } from './blog.interface'
 import BlogModel from './blog.model'
 

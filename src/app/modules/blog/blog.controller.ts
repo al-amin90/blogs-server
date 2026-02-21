@@ -5,6 +5,9 @@ import { blogService } from './blog.service'
 
 const blogCreate = catchAsync(async (req, res) => {
   const payload = req.body
+
+  payload.author = req.user._id
+
   const result = await blogService.createBlogIntoDB(payload)
 
   sendResponse(res, {

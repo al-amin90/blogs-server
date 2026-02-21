@@ -62,8 +62,9 @@ const updateSingleBlog = catchAsync(async (req, res) => {
 
 const deleteSingleBlog = catchAsync(async (req, res) => {
   const { id } = req.params
+  const { role } = req.user
 
-  await blogService.deleteBlogFromDB(id as string, req.user._id)
+  await blogService.deleteBlogFromDB(id as string, role, req.user._id)
 
   sendResponse(res, {
     statusCode: status.OK,

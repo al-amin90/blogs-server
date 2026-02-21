@@ -4,6 +4,7 @@ import { userValidator } from './user.validate'
 import { userController } from './user.controller'
 import { USER_ROLE } from './user.constant'
 import auth from '../../middlewares/auth'
+import { blogController } from '../blog/blog.controller'
 
 const router = Router()
 
@@ -22,9 +23,11 @@ router.patch(
   auth(USER_ROLE.admin),
   userController.adminUserBlock,
 )
-// router.get('/:id', blogController.getSingleBlog)
-// router.patch('/:id', blogController.updateSingleBlog)
-// router.delete('/:id', blogController.deleteSingleBlog)
+router.delete(
+  '/blogs/:id',
+  auth(USER_ROLE.admin),
+  blogController.deleteSingleBlog,
+)
 
 const authRouter = router
 

@@ -47,8 +47,15 @@ const updateBlogIntoDB = async (
   return result
 }
 
-const deleteBlogFromDB = async (id: string, author: string) => {
-  const result = await BlogModel.findOneAndDelete({ _id: id, author })
+const deleteBlogFromDB = async (id: string, role: string, author: string) => {
+  let result
+  console.log('deleteSingleBlog', role)
+
+  if (role === 'admin') {
+    result = await BlogModel.findByIdAndDelete(id)
+  } else {
+    result = await BlogModel.findOneAndDelete({ _id: id, author })
+  }
 
   if (!result) {
     throw new AppError(status.BAD_REQUEST, 'You cant delete is blog ')

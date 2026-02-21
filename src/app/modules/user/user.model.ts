@@ -9,8 +9,9 @@ const userSchema = new Schema<TUser>(
     role: {
       type: String,
       enum: ['admin', 'user'],
+      default: 'user',
     },
-    isBlocked: Boolean,
+    isBlocked: { type: Boolean, default: false },
   },
   { timestamps: true },
 )

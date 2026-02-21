@@ -17,13 +17,13 @@ const registerUser = catchAsync(async (req, res) => {
 
 const loginUser = catchAsync(async (req, res) => {
   const payload = req.body
-  const result = await userService.loginUserIntoDB(payload)
+  const token = await userService.loginUserIntoDB(payload)
 
   sendResponse(res, {
     statusCode: status.OK,
     success: true,
     message: 'Login Successfully',
-    data: result,
+    data: { token },
   })
 })
 

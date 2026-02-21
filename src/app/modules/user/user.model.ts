@@ -22,6 +22,9 @@ const userSchema = new Schema<TUser>(
       async isUserExist(email) {
         return await this.findOne({ email })
       },
+      async isPasswordMatch(password, hashPassword) {
+        return await bcrypt.compare(password, hashPassword)
+      },
     },
     timestamps: true,
   },

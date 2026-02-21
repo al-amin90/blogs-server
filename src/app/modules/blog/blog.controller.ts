@@ -29,7 +29,7 @@ const getAllBlog = catchAsync(async (req, res) => {
 const getSingleBlog = catchAsync(async (req, res) => {
   const { id } = req.params
 
-  const result = await blogService.getSingleBlogFromDB(id)
+  const result = await blogService.getSingleBlogFromDB(id as string)
 
   sendResponse(res, {
     statusCode: status.OK,
@@ -41,9 +41,9 @@ const getSingleBlog = catchAsync(async (req, res) => {
 
 const updateSingleBlog = catchAsync(async (req, res) => {
   const { id } = req.params
-  const { Blog } = req.body
+  const payload = req.body
 
-  const result = await blogService.updateBlogIntoDB(id, Blog)
+  const result = await blogService.updateBlogIntoDB(id as string, payload)
 
   sendResponse(res, {
     statusCode: status.OK,
@@ -56,7 +56,7 @@ const updateSingleBlog = catchAsync(async (req, res) => {
 const deleteSingleBlog = catchAsync(async (req, res) => {
   const { id } = req.params
 
-  const result = await blogService.deleteBlogFromDB(id)
+  const result = await blogService.deleteBlogFromDB(id as string)
   sendResponse(res, {
     statusCode: status.OK,
     success: true,

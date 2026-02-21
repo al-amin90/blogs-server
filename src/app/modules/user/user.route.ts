@@ -1,14 +1,19 @@
 import { Router } from 'express'
-import { blogController } from '../blog/blog.controller'
 import validateRequest from '../../middlewares/validateRequest'
-import blogValidationSchema from '../blog/blog.validate'
+import { userValidator } from './user.validate'
+import { userController } from './user.controller'
 
 const router = Router()
 
 router.post(
   '/register',
-  validateRequest(blogValidationSchema),
-  blogController.blogCreate,
+  validateRequest(userValidator.registerValidationSchema),
+  userController.registerUser,
+)
+router.post(
+  '/login',
+  validateRequest(userValidator.loginValidationSchema),
+  userController.loginUser,
 )
 // router.get('/', blogController.getAllBlog)
 // router.get('/:id', blogController.getSingleBlog)

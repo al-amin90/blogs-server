@@ -1,9 +1,13 @@
-import { Types } from 'mongoose'
+import { Model } from 'mongoose'
 
 export type TUser = {
   name: string
   email: string
-  password: Types.ObjectId
+  password: string
   role: 'admin' | 'user'
   isBlocked: boolean
+}
+
+export interface IUserModel extends Model<TUser> {
+  isUserExist(email: string): Promise<string> | null
 }

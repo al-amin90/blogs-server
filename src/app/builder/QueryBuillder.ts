@@ -1,4 +1,4 @@
-import { Query } from 'mongoose'
+import { ObjectId, Query, Types } from 'mongoose'
 import { TBlog } from '../modules/blog/blog.interface'
 
 class QueryBuilder<T> {
@@ -32,7 +32,7 @@ class QueryBuilder<T> {
     excludeFields.forEach(el => delete queryObj[el])
 
     if (this.query.filter) {
-      filter.author = queryObj.filter
+      filter.author = new Types.ObjectId(queryObj.filter as string)
     }
 
     this.modelQuery = this.modelQuery.find(filter)

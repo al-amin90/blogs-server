@@ -29,7 +29,11 @@ const loginUserIntoDB = async (payload: Pick<TUser, 'email' | 'password'>) => {
     throw new AppError(status.UNAUTHORIZED, 'Invalid credentials')
   }
 
-  const jwtPayload = { _id: user._id, email: user.email, role: user?.role }
+  const jwtPayload = {
+    _id: user._id?.toString() || '',
+    email: user.email,
+    role: user?.role,
+  }
 
   const token = createToken(
     jwtPayload,

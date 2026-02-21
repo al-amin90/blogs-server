@@ -39,7 +39,6 @@ const updateBlogIntoDB = async (
       runValidators: true,
     },
   )
-  console.log('result', result)
   if (!result) {
     throw new AppError(status.BAD_REQUEST, 'You cant update is blog ')
   }
@@ -49,7 +48,6 @@ const updateBlogIntoDB = async (
 
 const deleteBlogFromDB = async (id: string, role: string, author: string) => {
   let result
-  console.log('deleteSingleBlog', role)
 
   if (role === 'admin') {
     result = await BlogModel.findByIdAndDelete(id)

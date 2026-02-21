@@ -6,7 +6,7 @@ const createBlogIntoDB = async (payload: TBlog) => {
   return result
 }
 
-const getAllBlogFromDB = async () => {
+const getAllBlogFromDB = async query => {
   const result = await BlogModel.find()
   return result
 }

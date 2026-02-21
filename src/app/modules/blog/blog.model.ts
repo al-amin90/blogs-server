@@ -9,7 +9,7 @@ const blogSchema = new Schema<TBlog>(
       type: Schema.Types.ObjectId,
       ref: 'User',
     },
-    isPublished: Boolean,
+    isPublished: { type: Boolean, default: true },
   },
   { timestamps: true },
 )

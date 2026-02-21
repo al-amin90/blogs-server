@@ -1,3 +1,5 @@
+import status from 'http-status'
+import AppError from '../../errors/AppError'
 import UserModel from '../user/user.model'
 import { TBlog } from './blog.interface'
 import BlogModel from './blog.model'
@@ -18,17 +20,33 @@ const getSingleBlogFromDB = async (id: string) => {
   return result
 }
 
-const updateBlogIntoDB = async (id: string, payload: Partial<TBlog>) => {
-  const result = await BlogModel.findByIdAndUpdate(id, payload, {
-    new: true,
-    runValidators: true,
-  })
+const updateBlogIntoDB = async (
+  id: string,
+  author: string,
+  payload: Partial<TBlog>,
+) => {
+  const result = await BlogModel.findOneAndUpdate(
+    { _id: id, author },
+    payload,
+    {
+      new: true,
+      runValidators: true,
+    },
+  )
+  console.log('result', result)
+  if (!result) {
+    throw new AppError(status.BAD_REQUEST, 'You cant update is blog ')
+  }
+
   return result
 }
 
-const deleteBlogFromDB = async (id: string) => {
-  const result = await BlogModel.findByIdAndDelete(id)
+const deleteBlogFromDB = async (id: string, author: string) => {
+  const result = await BlogModel.findOneAndDelete({ _id: id, author })
 
+  if (!result) {
+    throw new AppError(status.BAD_REQUEST, 'You cant delete is blog ')
+  }
   return result
 }
 
